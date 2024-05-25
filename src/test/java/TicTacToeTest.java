@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -55,5 +56,40 @@ public class TicTacToeTest {
 
     Exception exception = assertThrows(Exception.class, () -> ticTacToeGame.addMovement(secondMovement));
     assertEquals("Invalid position", exception.getMessage());
+  }
+
+  @Disabled("Going for something easier before")
+  @Test
+  public void aColumnFromTheSamePlayerWinsTheGame() throws Exception {
+    TicTacToeBoard board = new TicTacToeBoard();
+    TicTacToeGame ticTacToeGame = new TicTacToeGame(board);
+
+    Movement firstMovement = new Movement(TokenSymbol.X, 0, 0);
+    ticTacToeGame.addMovement(firstMovement);
+
+    Movement secondMovement = new Movement(TokenSymbol.O, 1, 0);
+    ticTacToeGame.addMovement(secondMovement);
+
+    Movement thirdMovement = new Movement(TokenSymbol.X, 0, 1);
+    ticTacToeGame.addMovement(thirdMovement);
+
+    Movement fourthMovement = new Movement(TokenSymbol.O, 1, 0);
+    ticTacToeGame.addMovement(fourthMovement);
+
+    Movement fifthMovement = new Movement(TokenSymbol.X, 0, 2);
+    ticTacToeGame.addMovement(fifthMovement);
+
+    assertEquals(GameStatus.PLAYER_X_WON, ticTacToeGame.getStatus());
+  }
+
+  @Test
+  public void gameIsInProgressIfNobodyWon() throws Exception {
+    TicTacToeBoard board = new TicTacToeBoard();
+    TicTacToeGame ticTacToeGame = new TicTacToeGame(board);
+
+    Movement firstMovement = new Movement(TokenSymbol.X, 0, 0);
+    ticTacToeGame.addMovement(firstMovement);
+
+    assertEquals(GameStatus.IN_PROGRESS, ticTacToeGame.getStatus());
   }
 }

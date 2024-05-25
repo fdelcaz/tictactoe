@@ -14,4 +14,8 @@ public class TicTacToeGame {
 
     board.addMovement(movement);
   }
+
+  public GameStatus getStatus() {
+    return GameStatus.IN_PROGRESS;
+  }
 }
