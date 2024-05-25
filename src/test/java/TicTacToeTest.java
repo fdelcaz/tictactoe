@@ -187,9 +187,27 @@ public class TicTacToeTest {
     assertEquals(GameStatus.PLAYER_X_WON, ticTacToeGame.getStatus());
   }
 
-  @Disabled
   @Test
-  public void movementCannotGoOutOfBoundaries(){}
+  public void movementCannotGoOutOfBoundariesInX() throws Exception {
+    TicTacToeBoard board = new TicTacToeBoard();
+    TicTacToeGame ticTacToeGame = new TicTacToeGame(board);
+
+    Movement movement = new Movement(TokenSymbol.X, 3, 0);
+
+    Exception exception = assertThrows(Exception.class, () -> ticTacToeGame.addMovement(movement));
+    assertEquals("Position out of boundaries", exception.getMessage());
+  }
+
+  @Test
+  public void movementCannotGoOutOfBoundariesInY() throws Exception {
+    TicTacToeBoard board = new TicTacToeBoard();
+    TicTacToeGame ticTacToeGame = new TicTacToeGame(board);
+
+    Movement movement = new Movement(TokenSymbol.X, 1, 8);
+
+    Exception exception = assertThrows(Exception.class, () -> ticTacToeGame.addMovement(movement));
+    assertEquals("Position out of boundaries", exception.getMessage());
+  }
 
   @Disabled
   @Test

@@ -17,6 +17,12 @@ public class TicTacToeGame {
       throw new Exception("A player cannot play two times in a row");
     }
 
+    if(movement.getX() < 0 || movement.getX() > 2)
+      throw new Exception("Position out of boundaries");
+
+    if(movement.getY() < 0 || movement.getY() > 2)
+      throw new Exception("Position out of boundaries");
+
     board.addMovement(movement);
   }
 
