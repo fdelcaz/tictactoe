@@ -25,4 +25,12 @@ public class TicTacToeBoard {
 
     return TokenSymbol.X;
   }
+
+  public boolean isFirstColumnOccupiedByPlayerX() {
+    boolean ZeroZeroIsOwnedByPlayerX = movements.stream().anyMatch(x -> x.getX() == 0 && x.getY() == 0 && x.getPlayer() == TokenSymbol.X);
+    boolean ZeroOneIsOwnedByPlayerX = movements.stream().anyMatch(x -> x.getX() == 0 && x.getY() == 1 && x.getPlayer() == TokenSymbol.X);
+    boolean ZeroTwoIsOwnedByPlayerX = movements.stream().anyMatch(x -> x.getX() == 0 && x.getY() == 2 && x.getPlayer() == TokenSymbol.X);
+
+    return ZeroZeroIsOwnedByPlayerX && ZeroOneIsOwnedByPlayerX && ZeroTwoIsOwnedByPlayerX;
+  }
 }

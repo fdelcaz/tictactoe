@@ -58,9 +58,8 @@ public class TicTacToeTest {
     assertEquals("Invalid position", exception.getMessage());
   }
 
-  @Disabled("Going for something easier before")
   @Test
-  public void aColumnFromTheSamePlayerWinsTheGame() throws Exception {
+  public void playerXConquersFirstColumnWinsTheGame() throws Exception {
     TicTacToeBoard board = new TicTacToeBoard();
     TicTacToeGame ticTacToeGame = new TicTacToeGame(board);
 
@@ -73,7 +72,7 @@ public class TicTacToeTest {
     Movement thirdMovement = new Movement(TokenSymbol.X, 0, 1);
     ticTacToeGame.addMovement(thirdMovement);
 
-    Movement fourthMovement = new Movement(TokenSymbol.O, 1, 0);
+    Movement fourthMovement = new Movement(TokenSymbol.O, 2, 0);
     ticTacToeGame.addMovement(fourthMovement);
 
     Movement fifthMovement = new Movement(TokenSymbol.X, 0, 2);
