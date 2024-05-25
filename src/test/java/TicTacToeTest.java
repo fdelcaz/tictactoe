@@ -240,9 +240,9 @@ public class TicTacToeTest {
 
     ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 1, 1));
 
-    ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 0, 2));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 1, 2));
 
-    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 1, 2));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 0, 2));
 
     Exception exception = assertThrows(Exception.class, () -> ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 0, 0)));
     assertEquals("The game is already won", exception.getMessage());
