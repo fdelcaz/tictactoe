@@ -164,6 +164,29 @@ public class TicTacToeTest {
     assertEquals(GameStatus.PLAYER_X_WON, ticTacToeGame.getStatus());
   }
 
+  @Test
+  public void playerXConquersADiagonalWinsTheGame() throws Exception {
+    TicTacToeBoard board = new TicTacToeBoard();
+    TicTacToeGame ticTacToeGame = new TicTacToeGame(board);
+
+    Movement firstMovement = new Movement(TokenSymbol.X, 2, 0);
+    ticTacToeGame.addMovement(firstMovement);
+
+    Movement secondMovement = new Movement(TokenSymbol.O, 0, 1);
+    ticTacToeGame.addMovement(secondMovement);
+
+    Movement thirdMovement = new Movement(TokenSymbol.X, 1, 1);
+    ticTacToeGame.addMovement(thirdMovement);
+
+    Movement fourthMovement = new Movement(TokenSymbol.O, 0, 2);
+    ticTacToeGame.addMovement(fourthMovement);
+
+    Movement fifthMovement = new Movement(TokenSymbol.X, 2, 2);
+    ticTacToeGame.addMovement(fifthMovement);
+
+    assertEquals(GameStatus.PLAYER_X_WON, ticTacToeGame.getStatus());
+  }
+
   @Disabled
   @Test
   public void movementCannotGoOutOfBoundaries(){}

@@ -26,20 +26,38 @@ public class TicTacToeBoard {
     return TokenSymbol.X;
   }
 
-  public boolean isTheColumnOccupiedByPlayer(int columnIndex, TokenSymbol player) {
-    boolean ZeroZeroIsOwnedByPlayerX = isPositionOccupiedByPlayer(columnIndex, 0, player);
-    boolean ZeroOneIsOwnedByPlayerX = isPositionOccupiedByPlayer(columnIndex, 1, player);
-    boolean ZeroTwoIsOwnedByPlayerX = isPositionOccupiedByPlayer(columnIndex, 2, player);
 
-    return ZeroZeroIsOwnedByPlayerX && ZeroOneIsOwnedByPlayerX && ZeroTwoIsOwnedByPlayerX;
+  //Could de merged but I dont see a lot of value on it
+  public boolean isTheColumnOccupiedByPlayer(int columnIndex, TokenSymbol player) {
+    boolean firstXInColumn = isPositionOccupiedByPlayer(columnIndex, 0, player);
+    boolean secondXInColumn = isPositionOccupiedByPlayer(columnIndex, 1, player);
+    boolean thirdXInColumn = isPositionOccupiedByPlayer(columnIndex, 2, player);
+
+    return firstXInColumn && firstXInColumn && thirdXInColumn;
   }
 
   public boolean isTheRowOccupiedByPlayer(int rowIndex, TokenSymbol player) {
-    boolean ZeroZeroIsOwnedByPlayerX = isPositionOccupiedByPlayer(0, rowIndex, player);
-    boolean ZeroOneIsOwnedByPlayerX = isPositionOccupiedByPlayer(1, rowIndex, player);
-    boolean ZeroTwoIsOwnedByPlayerX = isPositionOccupiedByPlayer(2, rowIndex, player);
+    boolean firstYInColumn = isPositionOccupiedByPlayer(0, rowIndex, player);
+    boolean secondYInColumn = isPositionOccupiedByPlayer(1, rowIndex, player);
+    boolean thirdYInColumn = isPositionOccupiedByPlayer(2, rowIndex, player);
 
-    return ZeroZeroIsOwnedByPlayerX && ZeroOneIsOwnedByPlayerX && ZeroTwoIsOwnedByPlayerX;
+    return firstYInColumn && secondYInColumn && thirdYInColumn;
+  }
+
+  public boolean isFirstDiagonalOccupiedByPlayer(int rowIndex, TokenSymbol player) {
+    boolean ZeroZeroIsOwnedByPlayerX = isPositionOccupiedByPlayer(0, 0, player);
+    boolean OneOneIsOwnedByPlayerX = isPositionOccupiedByPlayer(1, 1, player);
+    boolean TwoTwoIsOwnedByPlayerX = isPositionOccupiedByPlayer(2, 2, player);
+
+    return ZeroZeroIsOwnedByPlayerX && OneOneIsOwnedByPlayerX && TwoTwoIsOwnedByPlayerX;
+  }
+
+  public boolean isSecondDiagonalOccupiedByPlayer(int rowIndex, TokenSymbol player) {
+    boolean ZeroZeroIsOwnedByPlayerX = isPositionOccupiedByPlayer(2, 0, player);
+    boolean OneOneIsOwnedByPlayerX = isPositionOccupiedByPlayer(1, 1, player);
+    boolean TwoTwoIsOwnedByPlayerX = isPositionOccupiedByPlayer(0, 2, player);
+
+    return ZeroZeroIsOwnedByPlayerX && OneOneIsOwnedByPlayerX && TwoTwoIsOwnedByPlayerX;
   }
 
   private boolean isPositionOccupiedByPlayer(int x, int y, TokenSymbol player) {
