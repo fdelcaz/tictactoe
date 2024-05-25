@@ -7,10 +7,6 @@ public class TicTacToeGame {
   }
 
   public void addMovement(Movement movement) throws Exception {
-    if(movement.getPlayer() == TokenSymbol.O){
-      throw new Exception("Player X should move first");
-    }
-
     TokenSymbol nextPlayer = board.getNextPlayer();
     if(movement.getPlayer() != nextPlayer){
       throw new Exception("A player cannot play two times in a row");
