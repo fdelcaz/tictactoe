@@ -17,14 +17,9 @@ public class TicTacToeGame {
 
   public GameStatus getStatus() {
 
-    if(board.isFirstColumnOccupiedByPlayerX()){
+    if(board.isTheColumnOccupiedByPlayerX(0) || board.isTheColumnOccupiedByPlayerX(1) || board.isTheColumnOccupiedByPlayerX(2)){
       return GameStatus.PLAYER_X_WON;
     }
-
-    if(board.isSecondColumnOccupiedByPlayerX()){
-      return GameStatus.PLAYER_X_WON;
-    }
-
     return GameStatus.IN_PROGRESS;
   }
 }
