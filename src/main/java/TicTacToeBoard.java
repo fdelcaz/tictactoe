@@ -27,10 +27,14 @@ public class TicTacToeBoard {
   }
 
   public boolean isFirstColumnOccupiedByPlayerX() {
-    boolean ZeroZeroIsOwnedByPlayerX = movements.stream().anyMatch(x -> x.getX() == 0 && x.getY() == 0 && x.getPlayer() == TokenSymbol.X);
-    boolean ZeroOneIsOwnedByPlayerX = movements.stream().anyMatch(x -> x.getX() == 0 && x.getY() == 1 && x.getPlayer() == TokenSymbol.X);
-    boolean ZeroTwoIsOwnedByPlayerX = movements.stream().anyMatch(x -> x.getX() == 0 && x.getY() == 2 && x.getPlayer() == TokenSymbol.X);
+    boolean ZeroZeroIsOwnedByPlayerX = isPositionOccupiedByPlayer(0, 0, TokenSymbol.X);
+    boolean ZeroOneIsOwnedByPlayerX = isPositionOccupiedByPlayer(0, 1, TokenSymbol.X);
+    boolean ZeroTwoIsOwnedByPlayerX = isPositionOccupiedByPlayer(0, 2, TokenSymbol.X);
 
     return ZeroZeroIsOwnedByPlayerX && ZeroOneIsOwnedByPlayerX && ZeroTwoIsOwnedByPlayerX;
+  }
+
+  private boolean isPositionOccupiedByPlayer(int x, int y, TokenSymbol player) {
+    return movements.stream().anyMatch(position -> position.getX() == x && position.getY() == y && position.getPlayer() == player);
   }
 }
