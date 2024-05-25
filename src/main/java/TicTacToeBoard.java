@@ -26,10 +26,10 @@ public class TicTacToeBoard {
     return TokenSymbol.X;
   }
 
-  public boolean isTheColumnOccupiedByPlayerX(int columnIndex) {
-    boolean ZeroZeroIsOwnedByPlayerX = isPositionOccupiedByPlayer(columnIndex, 0, TokenSymbol.X);
-    boolean ZeroOneIsOwnedByPlayerX = isPositionOccupiedByPlayer(columnIndex, 1, TokenSymbol.X);
-    boolean ZeroTwoIsOwnedByPlayerX = isPositionOccupiedByPlayer(columnIndex, 2, TokenSymbol.X);
+  public boolean isTheColumnOccupiedByPlayer(int columnIndex, TokenSymbol player) {
+    boolean ZeroZeroIsOwnedByPlayerX = isPositionOccupiedByPlayer(columnIndex, 0, player);
+    boolean ZeroOneIsOwnedByPlayerX = isPositionOccupiedByPlayer(columnIndex, 1, player);
+    boolean ZeroTwoIsOwnedByPlayerX = isPositionOccupiedByPlayer(columnIndex, 2, player);
 
     return ZeroZeroIsOwnedByPlayerX && ZeroOneIsOwnedByPlayerX && ZeroTwoIsOwnedByPlayerX;
   }
