@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,7 +27,6 @@ public class TicTacToeTest {
 
   @Test
   public void player0GoesAfterPlayerX() throws Exception {
-
     TicTacToeBoard board = mock(TicTacToeBoard.class);
     TicTacToeGame ticTacToeGame = new TicTacToeGame(board);
 
@@ -38,10 +37,13 @@ public class TicTacToeTest {
       .thenReturn(TokenSymbol.X)
       .thenReturn(TokenSymbol.O);
 
+    when(board.anyMovementsLeft()).thenReturn(true);
+
     ticTacToeGame.addMovement(firstMovement);
     ticTacToeGame.addMovement(secondMovement);
 
-    verify(board, times(2)).addMovement(any());
+    verify(board, times(1)).addMovement(firstMovement);
+    verify(board, times(1)).addMovement(secondMovement);
   }
 
   @Test
@@ -214,18 +216,21 @@ public class TicTacToeTest {
     TicTacToeBoard board = new TicTacToeBoard();
     TicTacToeGame ticTacToeGame = new TicTacToeGame(board);
 
-    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 0, 0));
-    ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 0, 1));
-    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 0, 2));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 1, 0));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 0, 0));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 2, 1));
 
-    ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 1, 0));
-    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 1, 1));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 1, 1));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 0, 1));
     ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 1, 2));
 
-    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 2, 1));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 0, 2));
     ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 2, 0));
+
+    ticTacToeGame.getStatus();
     ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 2, 2));
 
+    ticTacToeGame.getStatus();
     assertEquals(GameStatus.GAME_OVER, ticTacToeGame.getStatus());
   }
 

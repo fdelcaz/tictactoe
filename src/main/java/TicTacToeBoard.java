@@ -6,7 +6,7 @@ public class TicTacToeBoard {
 
   public void addMovement(Movement movement) throws Exception {
 
-    boolean positionIsOccupied = movements.stream().anyMatch(x -> x.getX() == movement.getX() && x.getY() == movement.getY());
+    boolean positionIsOccupied = this.movements.stream().anyMatch(x -> x.getX() == movement.getX() && x.getY() == movement.getY());
 
     if (positionIsOccupied){
       throw new Exception("Invalid position");
@@ -15,7 +15,7 @@ public class TicTacToeBoard {
   }
 
   public TokenSymbol getNextPlayer() {
-    if (movements.size() == MAX_MOVEMENTS){
+    if (this.movements.size() == MAX_MOVEMENTS){
       return null;
     }
 
@@ -23,12 +23,8 @@ public class TicTacToeBoard {
       return TokenSymbol.X;
     }
 
-    TokenSymbol lastPlayer = this.movements.get(this.movements.size()-1).getPlayer();
-    if(lastPlayer == TokenSymbol.X){
-      return TokenSymbol.O;
-    }
-
-    return TokenSymbol.X;
+    TokenSymbol lastPlayer = this.movements.get(this.movements.size() - 1).getPlayer();
+    return (lastPlayer == TokenSymbol.X) ? TokenSymbol.O : TokenSymbol.X;
   }
 
 
@@ -49,7 +45,7 @@ public class TicTacToeBoard {
     return firstYInColumn && secondYInColumn && thirdYInColumn;
   }
 
-  public boolean isFirstDiagonalOccupiedByPlayer(int rowIndex, TokenSymbol player) {
+  public boolean isFirstDiagonalOccupiedByPlayer(TokenSymbol player) {
     boolean ZeroZeroIsOwnedByPlayerX = isPositionOccupiedByPlayer(0, 0, player);
     boolean OneOneIsOwnedByPlayerX = isPositionOccupiedByPlayer(1, 1, player);
     boolean TwoTwoIsOwnedByPlayerX = isPositionOccupiedByPlayer(2, 2, player);
@@ -57,7 +53,7 @@ public class TicTacToeBoard {
     return ZeroZeroIsOwnedByPlayerX && OneOneIsOwnedByPlayerX && TwoTwoIsOwnedByPlayerX;
   }
 
-  public boolean isSecondDiagonalOccupiedByPlayer(int rowIndex, TokenSymbol player) {
+  public boolean isSecondDiagonalOccupiedByPlayer(TokenSymbol player) {
     boolean TwoZeroIsOwnedByPlayerX = isPositionOccupiedByPlayer(2, 0, player);
     boolean OneOneIsOwnedByPlayerX = isPositionOccupiedByPlayer(1, 1, player);
     boolean ZeroTwoIsOwnedByPlayerX = isPositionOccupiedByPlayer(0, 2, player);
@@ -66,6 +62,10 @@ public class TicTacToeBoard {
   }
 
   private boolean isPositionOccupiedByPlayer(int x, int y, TokenSymbol player) {
-    return movements.stream().anyMatch(position -> position.getX() == x && position.getY() == y && position.getPlayer() == player);
+    return this.movements.stream().anyMatch(position -> position.getX() == x && position.getY() == y && position.getPlayer() == player);
+  }
+
+  public boolean anyMovementsLeft() {
+    return this.movements.size() < MAX_MOVEMENTS;
   }
 }
