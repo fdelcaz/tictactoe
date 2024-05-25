@@ -22,19 +22,23 @@ public class TicTacToeGame {
 
   public GameStatus getStatus() {
 
-    if (isAnyColumnOccupiedByTheSamePlayer())
-      return GameStatus.PLAYER_X_WON;
+    TokenSymbol winner = getPlayerOwningAColumn();
+    if (winner != null){
+      if (winner == TokenSymbol.X)
+        return GameStatus.PLAYER_X_WON;
+      return GameStatus.PLAYER_O_WON;
+    }
 
     return GameStatus.IN_PROGRESS;
   }
 
-  private boolean isAnyColumnOccupiedByTheSamePlayer() {
+  private TokenSymbol getPlayerOwningAColumn() {
     for (TokenSymbol player : players) {
       for (int x = 0; x <= 2; x++) {
         if (board.isTheColumnOccupiedByPlayer(x, player))
-          return true;
+          return player;
       }
     }
-    return false;
+    return null;
   }
 }
