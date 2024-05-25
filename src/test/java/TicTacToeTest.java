@@ -34,13 +34,26 @@ public class TicTacToeTest {
     Movement secondMovement = new Movement(TokenSymbol.O, 1, 1);
 
     when(board.getNextPlayer())
-      .thenReturn(TokenSymbol.X)  // First call, it's X's turn
+      .thenReturn(TokenSymbol.X)
       .thenReturn(TokenSymbol.O);
 
     ticTacToeGame.addMovement(firstMovement);
     ticTacToeGame.addMovement(secondMovement);
 
     verify(board, times(2)).addMovement(any());
+  }
 
+  @Test
+  public void aPlayerCannotPlayInAnOccupiedPosition() throws Exception {
+    TicTacToeBoard board = new TicTacToeBoard();
+    TicTacToeGame ticTacToeGame = new TicTacToeGame(board);
+
+    Movement firstMovement = new Movement(TokenSymbol.X, 0, 0);
+    ticTacToeGame.addMovement(firstMovement);
+
+    Movement secondMovement = new Movement(TokenSymbol.O, 0, 0);
+
+    Exception exception = assertThrows(Exception.class, () -> ticTacToeGame.addMovement(secondMovement));
+    assertEquals("Invalid position", exception.getMessage());
   }
 }
