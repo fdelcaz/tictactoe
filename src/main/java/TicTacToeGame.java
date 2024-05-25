@@ -12,6 +12,10 @@ public class TicTacToeGame {
   }
 
   public void addMovement(Movement movement) throws Exception {
+    if(getStatus() != GameStatus.IN_PROGRESS){
+      throw new Exception("The game is already won");
+    }
+
     TokenSymbol nextPlayer = board.getNextPlayer();
     if (movement.getPlayer() != nextPlayer) {
       throw new Exception("A player cannot play two times in a row");
