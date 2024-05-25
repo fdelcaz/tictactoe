@@ -1,28 +1,37 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
 
 public class TicTacToeTest {
 
   @Test
-  public void playerOCannotMoveFirst() {
-    TicTacToeGame ticTacToeGame = new TicTacToeGame();
-
-    Exception exception = assertThrows(Exception.class, () -> ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 0, 0)));
-    assertEquals("Player X should move first", exception.getMessage());
+  public void playerXMustPlayFirst() throws Exception {
+    TicTacToeBoard board = new TicTacToeBoard();
+    assertEquals(TokenSymbol.X, board.getNextPlayer());
   }
 
   @Test
-  public void playerXCanMoveFirst() throws Exception {
-    TicTacToeGame ticTacToeGame = new TicTacToeGame();
-    Movement movement = new Movement(TokenSymbol.X, 0, 0);
-    ticTacToeGame.addMovement(movement);
+  public void aPlayerCannotMoveTwice() throws Exception {
+    TicTacToeBoard board = new TicTacToeBoard();
+    TicTacToeGame ticTacToeGame = new TicTacToeGame(board);
+    Movement firstMovement = new Movement(TokenSymbol.X, 0, 0);
+    Movement secondMovement = new Movement(TokenSymbol.X, 1, 1);
+    ticTacToeGame.addMovement(firstMovement);
 
-    ArrayList<Movement> movements = (ArrayList<Movement>) ticTacToeGame.getMovements();
-    assertEquals(movements, ticTacToeGame.getMovements());
+    Exception exception = assertThrows(Exception.class, () -> ticTacToeGame.addMovement(secondMovement));
+    assertEquals("A player cannot play two times in a row", exception.getMessage());
   }
+
+//  @Test
+//  public void playerOcanPlayAfterPlayerX(){
+//
+//    TicTacToeGame ticTacToeGame = new TicTacToeGame();
+//    mock(TicTacToeBoard.class);
+//    Movement firstMovement = new Movement(TokenSymbol.X, 0, 0);
+//    Movement secondMovement = new Movement(TokenSymbol.O, 1, 1);
+//
+//    ticTacToeGame.addMovement(firstMovement);
+
+//  }
 }

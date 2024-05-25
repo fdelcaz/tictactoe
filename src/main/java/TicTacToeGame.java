@@ -1,22 +1,21 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class TicTacToeGame {
-  private List<Movement> movements = new ArrayList<>();
+
+  private final TicTacToeBoard board;
+
+  public TicTacToeGame (TicTacToeBoard board){
+    this.board = board;
+  }
 
   public void addMovement(Movement movement) throws Exception {
     if(movement.getPlayer() == TokenSymbol.O){
       throw new Exception("Player X should move first");
     }
 
-    storeMovement(movement);
-  }
+    TokenSymbol nextPlayer = board.getNextPlayer();
+    if(movement.getPlayer() != nextPlayer){
+      throw new Exception("A player cannot play two times in a row");
+    }
 
-  public void storeMovement(Movement movement) {
-
-  }
-
-  public List<Movement> getMovements() {
-    return movements;
+    board.addMovement(movement);
   }
 }
