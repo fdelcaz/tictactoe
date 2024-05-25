@@ -1,14 +1,19 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class TicTacToeGame {
 
   private final TicTacToeBoard board;
+  List<TokenSymbol> players = new ArrayList<>(Arrays.asList(TokenSymbol.X, TokenSymbol.O));
 
-  public TicTacToeGame (TicTacToeBoard board){
+  public TicTacToeGame(TicTacToeBoard board) {
     this.board = board;
   }
 
   public void addMovement(Movement movement) throws Exception {
     TokenSymbol nextPlayer = board.getNextPlayer();
-    if(movement.getPlayer() != nextPlayer){
+    if (movement.getPlayer() != nextPlayer) {
       throw new Exception("A player cannot play two times in a row");
     }
 
@@ -17,14 +22,19 @@ public class TicTacToeGame {
 
   public GameStatus getStatus() {
 
-    if(board.isTheColumnOccupiedByPlayer(0, TokenSymbol.X)
-      || board.isTheColumnOccupiedByPlayer(1, TokenSymbol.X)
-      || board.isTheColumnOccupiedByPlayer(2, TokenSymbol.X)
-      || board.isTheColumnOccupiedByPlayer(0, TokenSymbol.O)
-      || board.isTheColumnOccupiedByPlayer(1, TokenSymbol.O)
-      || board.isTheColumnOccupiedByPlayer(2, TokenSymbol.O))
-        return GameStatus.PLAYER_X_WON;
+    if (isAnyColumnOccupiedByTheSamePlayer())
+      return GameStatus.PLAYER_X_WON;
 
     return GameStatus.IN_PROGRESS;
+  }
+
+  private boolean isAnyColumnOccupiedByTheSamePlayer() {
+    for (TokenSymbol player : players) {
+      for (int x = 0; x <= 2; x++) {
+        if (board.isTheColumnOccupiedByPlayer(x, player))
+          return true;
+      }
+    }
+    return false;
   }
 }
