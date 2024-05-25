@@ -33,7 +33,7 @@ public class TicTacToeBoard {
     boolean secondXInColumn = isPositionOccupiedByPlayer(columnIndex, 1, player);
     boolean thirdXInColumn = isPositionOccupiedByPlayer(columnIndex, 2, player);
 
-    return firstXInColumn && firstXInColumn && thirdXInColumn;
+    return firstXInColumn && secondXInColumn && thirdXInColumn;
   }
 
   public boolean isTheRowOccupiedByPlayer(int rowIndex, TokenSymbol player) {
