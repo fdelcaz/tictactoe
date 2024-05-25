@@ -178,10 +178,10 @@ public class TicTacToeTest {
     Movement thirdMovement = new Movement(TokenSymbol.X, 1, 1);
     ticTacToeGame.addMovement(thirdMovement);
 
-    Movement fourthMovement = new Movement(TokenSymbol.O, 0, 2);
+    Movement fourthMovement = new Movement(TokenSymbol.O, 2, 2);
     ticTacToeGame.addMovement(fourthMovement);
 
-    Movement fifthMovement = new Movement(TokenSymbol.X, 2, 2);
+    Movement fifthMovement = new Movement(TokenSymbol.X, 0, 2);
     ticTacToeGame.addMovement(fifthMovement);
 
     assertEquals(GameStatus.PLAYER_X_WON, ticTacToeGame.getStatus());
@@ -210,7 +210,24 @@ public class TicTacToeTest {
   }
 
   @Test
-  public void gameCanBeLost(){}
+  public void gameCanBeLost() throws Exception {
+    TicTacToeBoard board = new TicTacToeBoard();
+    TicTacToeGame ticTacToeGame = new TicTacToeGame(board);
+
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 0, 0));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 0, 1));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 0, 2));
+
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 1, 0));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 1, 1));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 1, 2));
+
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 2, 1));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 2, 0));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 2, 2));
+
+    assertEquals(GameStatus.GAME_OVER, ticTacToeGame.getStatus());
+  }
 
   @Test
   public void gameCannotContinueIfAlreadyWon() throws Exception {
@@ -225,7 +242,7 @@ public class TicTacToeTest {
 
     ticTacToeGame.addMovement(new Movement(TokenSymbol.O, 0, 2));
 
-    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 0, 2));
+    ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 1, 2));
 
     Exception exception = assertThrows(Exception.class, () -> ticTacToeGame.addMovement(new Movement(TokenSymbol.X, 0, 0)));
     assertEquals("The game is already won", exception.getMessage());

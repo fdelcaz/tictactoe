@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 public class TicTacToeBoard {
-  private ArrayList<Movement> movements = new ArrayList<>();
+  private static final int MAX_MOVEMENTS = 9;
+  private final ArrayList<Movement> movements = new ArrayList<>();
 
   public void addMovement(Movement movement) throws Exception {
 
@@ -14,6 +15,10 @@ public class TicTacToeBoard {
   }
 
   public TokenSymbol getNextPlayer() {
+    if (movements.size() == MAX_MOVEMENTS){
+      return null;
+    }
+
     if (this.movements.isEmpty()){
       return TokenSymbol.X;
     }
@@ -53,11 +58,11 @@ public class TicTacToeBoard {
   }
 
   public boolean isSecondDiagonalOccupiedByPlayer(int rowIndex, TokenSymbol player) {
-    boolean ZeroZeroIsOwnedByPlayerX = isPositionOccupiedByPlayer(2, 0, player);
+    boolean TwoZeroIsOwnedByPlayerX = isPositionOccupiedByPlayer(2, 0, player);
     boolean OneOneIsOwnedByPlayerX = isPositionOccupiedByPlayer(1, 1, player);
-    boolean TwoTwoIsOwnedByPlayerX = isPositionOccupiedByPlayer(0, 2, player);
+    boolean ZeroTwoIsOwnedByPlayerX = isPositionOccupiedByPlayer(0, 2, player);
 
-    return ZeroZeroIsOwnedByPlayerX && OneOneIsOwnedByPlayerX && TwoTwoIsOwnedByPlayerX;
+    return TwoZeroIsOwnedByPlayerX && OneOneIsOwnedByPlayerX && ZeroTwoIsOwnedByPlayerX;
   }
 
   private boolean isPositionOccupiedByPlayer(int x, int y, TokenSymbol player) {

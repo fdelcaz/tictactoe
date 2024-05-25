@@ -53,6 +53,11 @@ public class TicTacToeGame {
       return GameStatus.PLAYER_O_WON;
     }
 
+    //Nobody won but we cannot make any more movements
+    if(board.getNextPlayer() == null){
+      return GameStatus.GAME_OVER;
+    }
+
     return GameStatus.IN_PROGRESS;
   }
 
