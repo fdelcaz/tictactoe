@@ -5,6 +5,6 @@ public class TicTacToeGame {
   private List<Movement> movements = new ArrayList<>();
 
   public void addMovement(Movement movement) throws Exception {
-    throw new Exception("FAILED!");
+    throw new Exception("Player X should move first");
   }
 }
