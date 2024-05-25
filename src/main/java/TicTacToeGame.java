@@ -29,6 +29,13 @@ public class TicTacToeGame {
       return GameStatus.PLAYER_O_WON;
     }
 
+    winner = getPlayerOwningARow();
+    if (winner != null){
+      if (winner == TokenSymbol.X)
+        return GameStatus.PLAYER_X_WON;
+      return GameStatus.PLAYER_O_WON;
+    }
+
     return GameStatus.IN_PROGRESS;
   }
 
@@ -36,6 +43,16 @@ public class TicTacToeGame {
     for (TokenSymbol player : players) {
       for (int x = 0; x <= 2; x++) {
         if (board.isTheColumnOccupiedByPlayer(x, player))
+          return player;
+      }
+    }
+    return null;
+  }
+
+  private TokenSymbol getPlayerOwningARow() {
+    for (TokenSymbol player : players) {
+      for (int y = 0; y <= 2; y++) {
+        if (board.isTheRowOccupiedByPlayer(y, player))
           return player;
       }
     }
