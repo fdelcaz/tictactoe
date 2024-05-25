@@ -21,6 +21,10 @@ public class TicTacToeGame {
       return GameStatus.PLAYER_X_WON;
     }
 
+    if(board.isSecondColumnOccupiedByPlayerX()){
+      return GameStatus.PLAYER_X_WON;
+    }
+
     return GameStatus.IN_PROGRESS;
   }
 }
